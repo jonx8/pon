@@ -4,6 +4,10 @@ class Natural:
         self.A = list(int(i) for i in number)
         self.n = len(self.A)
 
+    def __str__(self):
+        """Возвращает строковое представление числа. Малых Андрей"""
+        return "".join(map(str, self.A))
+
 
 def COM_NN_D(a, b):
     """Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе. Андрей Виноградов"""
@@ -20,7 +24,9 @@ def COM_NN_D(a, b):
         return 2
 
 
-a = Natural('44')
-b = Natural('35')
-c = Natural('')  # Если вам нужно число без цифр длиной ноль, передайте пустую строку
-print(COM_NN_D(a, b))
+if __name__ == '__main__':
+    a = Natural('44')
+    b = Natural('35')
+    # Если вам нужно число без цифр длиной ноль, передайте пустую строку
+    c = Natural('')
+    print(COM_NN_D(a, b))
