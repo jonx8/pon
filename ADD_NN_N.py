@@ -1,7 +1,7 @@
 import COM_NN_D
 
 
-def ADD_NN_N(a,b): #Функция N-4 Виноградов А.С.
+def ADD_NN_N(a, b): #Функция N-4 Виноградов А.С.
     D = COM_NN_D(a, b) #Алгоритм функции:
     mind = 0
     if D == 0 or D == 1:
@@ -13,7 +13,7 @@ def ADD_NN_N(a,b): #Функция N-4 Виноградов А.С.
     a.reverse()
     b.reverse()
     for i in range(len(b)):
-        if a[i]+b[i]<=9 and mind == 0:
+        if a[i] + b[i] <=9 and mind == 0:
             c1[i] = a[i] + b[i]
         elif a[i] + b[i] > 9 and mind == 0:
             c1[i] = (a[i] + b[i])%10
