@@ -96,7 +96,9 @@ def ADD_NN_N(a, b):
     return D
 
 
-a = Natural(input())
-b = Natural(input())
-c = Natural('')  # Если вам нужно число без цифр длиной ноль, передайте пустую строку
-print(str(ADD_NN_N(a, b)))
+if __name__ == '__main__':
+    a = Natural('1895')
+    b = Natural('44')
+    # Если вам нужно число без цифр длиной ноль, передайте пустую строку
+    c = Natural('')
+    print(ADD_NN_N(a, b))

@@ -3,33 +3,30 @@ from rational import Rational
 
 class Polynome:
     def __init__(self, number=""):
-        """Принимает строку, в которой записана дробь
-            в виде a/b, выдает рациональное число. Таланков Влад."""
+        """Принимает строку с коэффециентами через пробел в виде a/b. Таланков Влад."""
         number = number.strip()
         self.C = []
         number = number.split(' ')
         self.m = len(number) - 1  # степень многочлена
-        for i in range(self.m + 1):
-            self.C.append(Rational(number[self.m - i]))  # массив с рац. числами
+        for i in number:
+            self.C.append(Rational(i))  # массив с рац. числами
 
     def __str__(self):
-        """Возвращает строковое представление числа
-            с x^n и знаками. Таланков Влад."""
-        str_out = ""
-        for i in range(self.m + 1):
-            if (i == 0) or self.C[self.m - i].numer.b:
-                str_out = str_out + str(self.C[self.m - i]) + 'x^' + str(self.m - i)
-            else:
-                str_out = str_out + '+' + str(self.C[self.m - i]) + 'x^' + str(self.m - i)
-        return str_out
+        """Возвращает строковое представление коэффициентов. Таланков Влад."""
+        str_out = []
+        for i in self.C:
+            str_out.append(str(i))
+        return ' '.join(str_out)
 
 
 def LED_P_Q(polynome):
-    return polynome.C[polynome.m]  # возвращает старший коэффициент многочлена
+    """Старший коэффициент многочлена. Таланков Влад."""
+    return polynome.C[0]
 
 
 def DEG_P_N(polynome):
-    return polynome.m  # возвращает степень многочлена
+    """Степень многочлена. Таланков Влад."""
+    return polynome.m
 
 
 if __name__ == '__main__':

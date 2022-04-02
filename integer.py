@@ -1,3 +1,6 @@
+from naturals import Natural
+
+
 class Integer:
     def __init__(self, number=""):
         """Принимает строку, выдает целое число. Малых Андрей"""
