@@ -19,6 +19,13 @@ class Rational:
         return str(self.numer) + '/' + str(self.denom)
 
 
+def INT_Q_B(a):
+    """Проверка на целое. Если рациональное число является целым, то True, иначе False. Щелочкова Екатерина."""
+    if a.denom.A[0] == 1 and a.denom.n == 1:
+        return True
+    return False
+
+
 if __name__ == '__main__':
     # Создание чисел:
     a = Rational("-65/32")
@@ -27,3 +34,4 @@ if __name__ == '__main__':
 
     print(a.denom.A)  # Вывод цифр знаменателя
     print(a.numer.b)  # Вывод знака числителя
+    print(INT_Q_B(a))
