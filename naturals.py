@@ -24,9 +24,79 @@ def COM_NN_D(a, b):
         return 2
 
 
-if __name__ == '__main__':
-    a = Natural('44')
-    b = Natural('35')
-    # Если вам нужно число без цифр длиной ноль, передайте пустую строку
-    c = Natural('')
-    print(COM_NN_D(a, b))
+def ADD_NN_N(a, b):
+    """Сложение натуральных чисел. Андрей Виноградов"""
+    Ifer = COM_NN_D(a, b)
+    a.A.reverse()
+    b.A.reverse()
+    mind = 0
+    D = Natural("")
+    if Ifer == 0 or Ifer == 1:
+        c1 = [0] * (a.n + 1)
+        c2 = [0] * a.n
+        last = b.n - 1
+        for i in range(a.n):
+            if i > last:
+                c1[i] = a.A[i]
+            else:
+                if a.A[i] + b.A[i] <= 9 and mind == 0:
+                    c1[i] = a.A[i] + b.A[i]
+                elif a.A[i] + b.A[i] > 9 and mind == 0:
+                    c1[i] = (a.A[i] + b.A[i]) % 10
+                    mind = (a.A[i] + b.A[i]) // 10
+                elif mind == 1:
+                    if a.A[i] + b.A[i] + mind <= 9:
+                        c1[i] = a.A[i] + b.A[i] + mind
+                        mind = 0
+                    else:
+                        c1[i] = (a.A[i] + b.A[i] + mind) % 10
+                        mind = (a.A[i] + b.A[i] + mind) // 10
+        if mind != 0:
+            c1[a.n] = mind
+            c1.reverse()
+            D.A = c1
+            D.n = b.n
+        else:
+            for i in range(a.n):
+                c2[i] = c1[i]
+            c2.reverse()
+            D.A = c2
+            D.n = a.n
+    else:
+        c1 = [0] * (b.n + 1)
+        c2 = [0] * b.n
+        last = a.n - 1
+        for i in range(b.n):
+            if i > last:
+                c1[i] = b.A[i]
+            else:
+                if a.A[i] + b.A[i] <= 9 and mind == 0:
+                    c1[i] = a.A[i] + b.A[i]
+                elif a.A[i] + b.A[i] > 9 and mind == 0:
+                    c1[i] = (a.A[i] + b.A[i]) % 10
+                    mind = (a.A[i] + b.A[i]) // 10
+                elif mind == 1:
+                    if a.A[i] + b.A[i] + mind <= 9:
+                        c1[i] = a.A[i] + b.A[i] + mind
+                        mind = 0
+                    else:
+                        c1[i] = (a.A[i] + b.A[i] + mind) % 10
+                        mind = (a.A[i] + b.A[i] + mind) // 10
+        if mind != 0:
+            c1[b.n] = mind
+            c1.reverse()
+            D.A = c1
+            D.n = b.n
+        else:
+            for i in range(b.n):
+                c2[i] = c1[i]
+            c2.reverse()
+            D.A = c2
+            D.n = b.n
+    return D
+
+
+a = Natural(input())
+b = Natural(input())
+c = Natural('')  # Если вам нужно число без цифр длиной ноль, передайте пустую строку
+print(str(ADD_NN_N(a, b)))
