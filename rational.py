@@ -26,12 +26,28 @@ def INT_Q_B(a):
     return False
 
 
+def TRANS_Q_Z(a):
+    """Преобразование дробного в целое(если знаменатель равен 1). Щелочоква Екатерина."""
+    if a.denom.A[0] == 1 and a.denom.n == 1:
+        return a.numer
+
+
+def TRANS_Z_Q(с):
+    """Преобразование целого в дробное. Щелочоква Екатерина."""
+    a.numer = с
+    a.denom = Natural('1')
+    return a
+
+
 if __name__ == '__main__':
     # Создание чисел:
     a = Rational("-65/32")
     b = Rational("0/53")
     c = Rational("63/1")
+    d = Integer("54")
 
     print(a.denom.A)  # Вывод цифр знаменателя
     print(a.numer.b)  # Вывод знака числителя
     print(INT_Q_B(a))
+    print(TRANS_Q_Z(c))
+    print(TRANS_Z_Q(d))
