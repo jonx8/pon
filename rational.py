@@ -14,8 +14,6 @@ class Rational:
 
     def __str__(self):
         """Возвращает строковое представление числа. Малых Андрей."""
-        if self.denom.A == [1] or self.numer.A == [0] or not self.denom.A:
-            return str(self.numer)
         return str(self.numer) + '/' + str(self.denom)
 
 
