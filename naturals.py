@@ -22,31 +22,26 @@ def COM_NN_D(a, b):
         return 2
     else:
         return 1
-    
 
-    
-   def MUL_ND_N(a, x):
+
+def MUL_ND_N(a, x):
     """Умножение натурального числа на цифру. Дитятьев Иван"""
-
-    if (x != 0):
-        
+    if x != 0:
         a.A.reverse()
         ost = 0
         for i in range(a.n):
             e = a.A[i]
-            a.A[i] = (((e * x) + ost) % 10) 
+            a.A[i] = (((e * x) + ost) % 10)
             ost = (((e * x) + ost) // 10)
-        if (i == a.n - 1 and ost > 0):
-            a.A.append(ost)  
-
+        if i == a.n - 1 and ost > 0:
+            a.A.append(ost)
         o = ""
         a.A.reverse()
         for i in a.A:
             o = o + str(i)
-
-        return(Natural(o))
+        return Natural(o)
     else:
-        return(Natural('0'))
+        return Natural('0')
 
 
 def SUB_NN_N(a, b):
@@ -149,6 +144,30 @@ def ADD_NN_N(a, b):
     for x in a.A:
         ans += str(x)
     return Natural(ans)
+
+
+def NZER_N_B(a):
+    """Проверка на ноль: если число не равно нулю, то 'да' иначе 'нет'. Айрапетов Давид"""
+    if a.A[0] == 0 and a.n == 1:
+        return True
+    else:
+        return False
+
+
+def ADD_1N_N(a):
+    """Добавление 1 к натуральному числу. Айрапетов Давид"""
+    i = 0
+    a.A.reverse()
+    while a.A[i] == 9 and i + 1 < a.n:
+        a.A[i] = 0
+        i += 1
+    if i == a.n:
+        a.A.append(1)
+        a.n += 1
+    else:
+        a.A[i] = a.A[i] + 1
+    a.A.reverse()
+    return a
 
 
 if __name__ == '__main__':
