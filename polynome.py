@@ -30,7 +30,7 @@ def DEG_P_N(polynome):
 
 
 def MUL_Pxk_P(a, k):
-    """Умножение на x^k. Угрюмов Михаил."""
+    """Умножение полинома на x^k. Угрюмов Михаил."""
     a.m = a.m + k
     for i in range(k):
         a.C.append(Rational("0/1"))
