@@ -15,3 +15,42 @@ class Integer:
     def __str__(self):
         """Возвращает строковое представление числа. Малых Андрей"""
         return ('-' if self.b else '') + "".join(map(str, self.A))
+
+def ABS_Z_N(z):
+    """Возвращает абсолютное значение числа(модуль). Максимов Матвей"""
+    if z.b == 1:
+        z.b = 0
+    else :
+        z.b = 0
+    return z
+
+def MUL_ZM_Z(z):
+    """Возвращает число с противоположным знаком(т.е умноженное на (-1). Максимов Матвей"""
+    if z.b == 1:
+        z.b = 0
+    else:
+        z.b = 1
+    return z
+
+def TRANS_N_Z(nat):
+    """Преобразует натуральное число в целое. Максимов Матвей"""
+    z.b=0
+    z.A=nat.A
+    z.n=nat.n
+    return z
+
+def TRANS_Z_N(z):
+    """Преобразует целое число в натуральное. Максимов Матвей"""
+    nat.b = 0
+    nat.A = z.A
+    nat.n = z.n
+    return nat
+
+if __name__ == '__main__':
+    z = Integer("4")
+    nat = Natural("6")
+    print(z)
+    print(ABS_Z_N(z))
+    print(MUL_ZM_Z(z))
+    print(TRANS_N_Z(nat))
+    print(TRANS_N_Z(z))
