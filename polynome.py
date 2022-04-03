@@ -29,10 +29,19 @@ def DEG_P_N(polynome):
     return polynome.m
 
 
+def MUL_Pxk_P(a, k):
+    """Умножение на x^k. Угрюмов Михаил."""
+    a.m = a.m + k
+    for i in range(k):
+        a.C.append(Rational("0/1"))
+    return a
+
+
 if __name__ == '__main__':
     a = Polynome("-4/3 7/5 13/2 -5/3 2/4")
     b = Polynome("3/2 -13/7 -5/2")
-
+    k = int(input())
     print(a)
     print(LED_P_Q(a))
     print(DEG_P_N(a))
+    print(MUL_Pxk_P(a, k))
