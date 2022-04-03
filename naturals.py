@@ -22,6 +22,31 @@ def COM_NN_D(a, b):
         return 2
     else:
         return 1
+    
+
+    
+   def MUL_ND_N(a, x):
+    """Умножение натурального числа на цифру. Дитятьев Иван"""
+
+    if (x != 0):
+        
+        a.A.reverse()
+        ost = 0
+        for i in range(a.n):
+            e = a.A[i]
+            a.A[i] = (((e * x) + ost) % 10) 
+            ost = (((e * x) + ost) // 10)
+        if (i == a.n - 1 and ost > 0):
+            a.A.append(ost)  
+
+        o = ""
+        a.A.reverse()
+        for i in a.A:
+            o = o + str(i)
+
+        return(Natural(o))
+    else:
+        return(Natural('0'))
 
 
 def SUB_NN_N(a, b):
