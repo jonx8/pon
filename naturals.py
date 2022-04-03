@@ -10,9 +10,7 @@ class Natural:
 
 
 def COM_NN_D(a, b):
-    """Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе. Андрей Виноградов"""
-    a.A.reverse()
-    b.A.reverse()
+    """Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе. Виноградов Андрей"""
     if a.n == b.n:
         for i in range(a.n):
             if a.A[i] > b.A[i]:
@@ -26,88 +24,8 @@ def COM_NN_D(a, b):
         return 1
 
 
-def ADD_NN_N(a, b):
-    """Сложение натуральных чисел. Андрей Виноградов"""
-    Ifer = COM_NN_D(a, b)
-    a.A.reverse()
-    b.A.reverse()
-    mind = 0
-    D = Natural("")
-    if Ifer == 0 or Ifer == 2:
-        c1 = [0] * (a.n + 1)
-        c2 = [0] * a.n
-        last = (b.n) - 1
-        for i in range (a.n):
-            if i>last:
-                if mind != 0:
-                    c1[i] = a.A[i] + mind
-                    mind = 0
-                else:
-                    c1[i] = a.A[i]
-            else:
-                if a.A[i] + b.A[i] <= 9 and mind == 0:
-                    c1[i] = a.A[i] + b.A[i]
-                elif a.A[i] + b.A[i] > 9 and mind == 0:
-                    c1[i] = (a.A[i] + b.A[i]) % 10
-                    mind = (a.A[i] + b.A[i]) // 10
-                elif mind == 1:
-                    if a.A[i] + b.A[i] + mind <= 9:
-                        c1[i] = a.A[i] + b.A[i] + mind
-                        mind = 0
-                    else:
-                        c1[i] = (a.A[i] + b.A[i] + mind) % 10
-                        mind = (a.A[i] + b.A[i] + mind) // 10
-        if mind != 0:
-            c1[a.n] = mind
-            c1.reverse()
-            D.A = c1
-            D.n = b.n
-        else:
-            for i in range(a.n):
-                c2[i] = c1[i]
-            c2.reverse()
-            D.A = c2
-            D.n = a.n
-    else:
-        c1 = [0] * (b.n + 1)
-        c2 = [0] * b.n
-        last = (a.n) - 1
-        for i in range(b.n):
-            if i>last:
-                if mind != 0:
-                    c1[i] = b.A[i] + mind
-                    mind = 0
-                else:
-                    c1[i] = b.A[i]
-            else:
-                if a.A[i] + b.A[i] <= 9 and mind == 0:
-                    c1[i] = a.A[i] + b.A[i]
-                elif a.A[i] + b.A[i] > 9 and mind == 0:
-                    c1[i] = (a.A[i] + b.A[i]) % 10
-                    mind = (a.A[i] + b.A[i]) // 10
-                elif mind == 1:
-                    if a.A[i] + b.A[i] + mind <= 9:
-                        c1[i] = a.A[i] + b.A[i] + mind
-                        mind = 0
-                    else:
-                        c1[i] = (a.A[i] + b.A[i] + mind) % 10
-                        mind = (a.A[i] + b.A[i] + mind) // 10
-        if mind != 0:
-            c1[b.n] = mind
-            c1.reverse()
-            D.A = c1
-            D.n = b.n
-        else:
-            for i in range(b.n):
-                c2[i] = c1[i]
-            c2.reverse()
-            D.A = c2
-            D.n = b.n
-    return D
-
-
 def SUB_NN_N(a, b):
-    """Вычитание из первого большего натурального числа второго меньшего или равного. Андрей Виноградов"""
+    """Вычитание из первого большего натурального числа второго меньшего или равного. Виноградов Андрей"""
     Ifer = COM_NN_D(a, b)
     D = Natural("")
     if Ifer == 2:
@@ -124,18 +42,18 @@ def SUB_NN_N(a, b):
                 else:
                     while a.A[k] == 0:
                         a.A[k] = 9
-                        k+=1
+                        k += 1
                     a.A[k] -= 1
                     c[i] = 10 + a.A[i] - b.A[i]
         c.reverse()
         k = 0
         j = 0
         while c[k] == 0:
-            k+=1
+            k += 1
         ans = [0] * (a.n - k)
-        for i in range(k,a.n):
+        for i in range(k, a.n):
             ans[j] = c[i]
-            j+=1
+            j += 1
         D.A = ans
         D.n = a.n - k
     elif Ifer == 1:
@@ -172,9 +90,45 @@ def SUB_NN_N(a, b):
     return D
 
 
+def MUL_Nk_N(a, k):
+    """Умножение натурального числа на 10^k. Ташимбетов Тимур"""
+    c = a.A
+    D = Natural("")
+    for i in range(k):
+        c.append(0)
+    D.A = c
+    return D
+
+
+def ADD_NN_N(a, b):
+    """Сложение натуральных чисел. Виноградов Андрей"""
+    if COM_NN_D(a, b) != 2:
+        tmp = b
+        b = a
+        a = tmp
+    a.A.reverse()
+    b.A.reverse()
+    for i in range(a.n - b.n):
+        b.A.append(0)
+    for i in range(a.n):
+        e = a.A[i]
+        f = b.A[i]
+        a.A[i] = (e + f) % 10
+        if (e + f) >= 10:
+            if i == a.n - 1:
+                a.A.append(1)
+                b.A.append(0)
+            b.A[i + 1] += 1
+    a.A.reverse()
+    ans = ""
+    for x in a.A:
+        ans += str(x)
+    return Natural(ans)
+
+
 if __name__ == '__main__':
-    a = Natural('1895')
-    b = Natural('44')
+    a = Natural('156')
+    b = Natural('9844')
     # Если вам нужно число без цифр длиной ноль, передайте пустую строку
     c = Natural('')
-    print(ADD_NN_N(a, b))
+    print(MUL_Nk_N(a, 3))

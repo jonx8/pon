@@ -16,11 +16,13 @@ class Integer:
         """Возвращает строковое представление числа. Малых Андрей"""
         return ('-' if self.b else '') + "".join(map(str, self.A))
 
+
 def ABS_Z_N(z):
     """Возвращает абсолютное значение числа(модуль). Максимов Матвей"""
-    nat.b=0
-    nat.A=z.A
+    nat.b = 0
+    nat.A = z.A
     return nat
+
 
 def MUL_ZM_Z(z):
     """Возвращает число с противоположным знаком(т.е умноженное на (-1). Максимов Матвей"""
@@ -30,12 +32,14 @@ def MUL_ZM_Z(z):
         z.b = 1
     return z
 
+
 def TRANS_N_Z(nat):
     """Преобразует натуральное число в целое. Максимов Матвей"""
-    z.b=0
-    z.A=nat.A
-    z.n=nat.n
+    z.b = 0
+    z.A = nat.A
+    z.n = nat.n
     return z
+
 
 def TRANS_Z_N(z):
     """Преобразует целое число в натуральное. Максимов Матвей"""
@@ -44,6 +48,7 @@ def TRANS_Z_N(z):
     nat.n = z.n
     return nat
 
+
 if __name__ == '__main__':
     z = Integer("-4")
     nat = Natural("6")
@@ -51,4 +56,4 @@ if __name__ == '__main__':
     print(ABS_Z_N(z))
     print(MUL_ZM_Z(z))
     print(TRANS_N_Z(nat))
-    print(TRANS_N_Z(z))
+    print(str(TRANS_N_Z(z)))
