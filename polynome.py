@@ -31,7 +31,9 @@ class Polynome:
                 return 'x'
             return ''
 
+
         res = ''
+
         for i in range(self.m, -1, -1):
             j = self.m - i  # Номер коэффициента
             koeff = self.C[j]   # Вид коэффициента при выводе
