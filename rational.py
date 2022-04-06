@@ -20,14 +20,33 @@ class Rational:
         return f'{self.numer}/{self.denom}'
 
 
+def INT_Q_B(a):
+    """Проверка на целое. Если рациональное число является целым, то True, иначе False. Щелочкова Екатерина."""
+    if a.denom.A[0] == 1 and a.denom.n == 1:
+        return True
+    return False
+
+
+def TRANS_Q_Z(a):
+    """Преобразование дробного в целое(если знаменатель равен 1). Щелочкова Екатерина."""
+    if a.denom.A[0] == 1 and a.denom.n == 1:
+        return a.numer
+
+
+def TRANS_Z_Q(с):
+    """Преобразование целого в дробное. Щелочкова Екатерина."""
+    a.numer = с
+    a.denom = Natural('1')
+    return a
+
+
 if __name__ == '__main__':
-    # Создание чисел:
     a = Rational("-65/32")
     b = Rational("0/53")
-    d = Rational()
     c = Rational("63/1")
-    print(a)
-    print(d)
-    print(c)
+    d = Integer("54")
+
     print(a.denom.A)  # Вывод цифр знаменателя
     print(a.numer.b)  # Вывод знака числителя
+    print(INT_Q_B(a))
+    print(TRANS_Q_Z(c))

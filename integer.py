@@ -48,11 +48,26 @@ def TRANS_Z_N(z):
     nat.n = z.n
     return nat
 
+<<<<<<< HEAD
+=======
+def POZ_Z_D(z):
+    """Определение положительности числа (2 - положительное, 0 — равное нулю, 1 - отрицательное) Багмутов Всеволод"""
+    if z.A[0]== 0 and z.n == 1:
+        return 0
+    elif z.b == 0:
+        return 2
+    elif z.b == 1:
+        return 1
+>>>>>>> c63f26b39ab9fdb337eb1ec0828562b68fd934c0
 
 if __name__ == '__main__':
     z = Integer("-4")
     nat = Natural("6")
     print(z)
+<<<<<<< HEAD
+=======
+    print(POZ_Z_D(z))
+>>>>>>> c63f26b39ab9fdb337eb1ec0828562b68fd934c0
     print(ABS_Z_N(z))
     print(MUL_ZM_Z(z))
     print(TRANS_N_Z(nat))
