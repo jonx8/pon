@@ -13,6 +13,7 @@ class Rational:
         if number[1] == '':
             self.denom = Natural('1')
 
+
     def __str__(self):
         """Возвращает строковое представление числа. Малых Андрей."""
         if self.denom.A == [1] or self.numer.A == [0] or not self.denom.A:
@@ -41,6 +42,7 @@ def TRANS_Z_Q(с):
 
 
 if __name__ == '__main__':
+    # Создание чисел:
     a = Rational("-65/32")
     b = Rational("0/53")
     c = Rational("63/1")
@@ -50,3 +52,4 @@ if __name__ == '__main__':
     print(a.numer.b)  # Вывод знака числителя
     print(INT_Q_B(a))
     print(TRANS_Q_Z(c))
+    print(TRANS_Z_Q(d))
