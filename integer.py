@@ -1,74 +1,178 @@
-from naturals import Natural
-
-
-class Integer:
-    def __init__(self, number=""):
-        """Принимает строку, выдает целое число. Малых Андрей"""
-        self.b = 0
-        if len(number) > 0:
-            if number[0] == '-':
-                self.b = 1
-                number = number[1:]
-        self.A = [int(i) for i in number]
-        self.n = len(number)
+class Natural:
+    def __init__(self, number):
+        """Принимает строку, выдает натуральное число, Смирнов Иван"""
+        self.A = list(int(i) for i in number)
+        self.n = len(self.A)
 
     def __str__(self):
         """Возвращает строковое представление числа. Малых Андрей"""
-        return ('-' if self.b else '') + "".join(map(str, self.A))
+        return "".join(map(str, self.A))
 
 
-def ABS_Z_N(z):
-    """Возвращает абсолютное значение числа(модуль). Максимов Матвей"""
-    nat.b = 0
-    nat.A = z.A
-    return nat
-
-
-def MUL_ZM_Z(z):
-    """Возвращает число с противоположным знаком(т.е умноженное на (-1). Максимов Матвей"""
-    if z.b == 1:
-        z.b = 0
-    else:
-        z.b = 1
-    return z
-
-
-def TRANS_N_Z(nat):
-    """Преобразует натуральное число в целое. Максимов Матвей"""
-    z.b = 0
-    z.A = nat.A
-    z.n = nat.n
-    return z
-
-
-def TRANS_Z_N(z):
-    """Преобразует целое число в натуральное. Максимов Матвей"""
-    nat.b = 0
-    nat.A = z.A
-    nat.n = z.n
-    return nat
-
-<<<<<<< HEAD
-=======
-def POZ_Z_D(z):
-    """Определение положительности числа (2 - положительное, 0 — равное нулю, 1 - отрицательное) Багмутов Всеволод"""
-    if z.A[0]== 0 and z.n == 1:
+def COM_NN_D(a, b):
+    """Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе. Виноградов Андрей"""
+    if a.n == b.n:
+        for i in range(a.n):
+            if a.A[i] > b.A[i]:
+                return 2
+            elif a.A[i] < b.A[i]:
+                return 1
         return 0
-    elif z.b == 0:
+    elif a.n > b.n:
         return 2
-    elif z.b == 1:
+    else:
         return 1
->>>>>>> c63f26b39ab9fdb337eb1ec0828562b68fd934c0
+
+
+def MUL_ND_N(a, x):
+    """Умножение натурального числа на цифру. Дитятьев Иван"""
+    if x != 0:
+        a.A.reverse()
+        ost = 0
+        for i in range(a.n):
+            e = a.A[i]
+            a.A[i] = (((e * x) + ost) % 10)
+            ost = (((e * x) + ost) // 10)
+        if i == a.n - 1 and ost > 0:
+            a.A.append(ost)
+        o = ""
+        a.A.reverse()
+        for i in a.A:
+            o = o + str(i)
+        return Natural(o)
+    else:
+        return Natural('0')
+
+
+def SUB_NN_N(a, b):
+    """Вычитание из первого большего натурального числа второго меньшего или равного. Виноградов Андрей"""
+    Ifer = COM_NN_D(a, b)
+    D = Natural("")
+    if Ifer == 2:
+        c = [0] * a.n
+        last = (b.n) - 1
+        for i in range(a.n):
+            k = i + 1
+            if i > last:
+                c[i] = a.A[i]
+            else:
+                if a.A[i] >= b.A[i]:
+                    c[i] = a.A[i] - b.A[i]
+
+                else:
+                    while a.A[k] == 0:
+                        a.A[k] = 9
+                        k += 1
+                    a.A[k] -= 1
+                    c[i] = 10 + a.A[i] - b.A[i]
+        c.reverse()
+        k = 0
+        j = 0
+        while c[k] == 0:
+            k += 1
+        ans = [0] * (a.n - k)
+        for i in range(k, a.n):
+            ans[j] = c[i]
+            j += 1
+        D.A = ans
+        D.n = a.n - k
+    elif Ifer == 1:
+        c = [0] * b.n
+        last = (a.n) - 1
+        for i in range(b.n):
+            k = i + 1
+            if i > last:
+                c[i] = b.A[i]
+            else:
+                if b.A[i] >= a.A[i]:
+                    c[i] = b.A[i] - a.A[i]
+
+                else:
+                    while b.A[k] == 0:
+                        b.A[k] = 9
+                        k += 1
+                    b.A[k] -= 1
+                    c[i] = 10 + b.A[i] - a.A[i]
+        c.reverse()
+        k = 0
+        j = 0
+        while c[k] == 0:
+            k += 1
+        ans = [0] * (b.n - k)
+        for i in range(k, b.n):
+            ans[j] = c[i]
+            j += 1
+        D.A = ans
+        D.n = b.n - k
+    else:
+        D.A = '0'
+        D.n = 1
+    return D
+
+
+def MUL_Nk_N(a, k):
+    """Умножение натурального числа на 10^k. Ташимбетов Тимур"""
+    c = a.A
+    D = Natural("")
+    for i in range(k):
+        c.append(0)
+    D.A = c
+    return D
+
+
+def ADD_NN_N(a, b):
+    """Сложение натуральных чисел. Виноградов Андрей"""
+    if COM_NN_D(a, b) != 2:
+        tmp = b
+        b = a
+        a = tmp
+    a.A.reverse()
+    b.A.reverse()
+    for i in range(a.n - b.n):
+        b.A.append(0)
+    for i in range(a.n):
+        e = a.A[i]
+        f = b.A[i]
+        a.A[i] = (e + f) % 10
+        if (e + f) >= 10:
+            if i == a.n - 1:
+                a.A.append(1)
+                b.A.append(0)
+            b.A[i + 1] += 1
+    a.A.reverse()
+    ans = ""
+    for x in a.A:
+        ans += str(x)
+    return Natural(ans)
+
+
+def NZER_N_B(a):
+    """Проверка на ноль: если число не равно нулю, то 'да' иначе 'нет'. Айрапетов Давид"""
+    if a.A[0] == 0 and a.n == 1:
+        return True
+    else:
+        return False
+
+
+def ADD_1N_N(a):
+    """Добавление 1 к натуральному числу. Айрапетов Давид"""
+    i = 0
+    a.A.reverse()
+    while a.A[i] == 9 and i + 1 < a.n:
+        a.A[i] = 0
+        i += 1
+    if i == a.n:
+        a.A.append(1)
+        a.n += 1
+    else:
+        a.A[i] = a.A[i] + 1
+    a.A.reverse()
+    return a
+
 
 if __name__ == '__main__':
-    z = Integer("-4")
-    nat = Natural("6")
-    print(z)
-<<<<<<< HEAD
-=======
-    print(POZ_Z_D(z))
->>>>>>> c63f26b39ab9fdb337eb1ec0828562b68fd934c0
-    print(ABS_Z_N(z))
-    print(MUL_ZM_Z(z))
-    print(TRANS_N_Z(nat))
-    print(str(TRANS_N_Z(z)))
+    a = Natural('156')
+    b = Natural('9844')
+    # Если вам нужно число без цифр длиной ноль, передайте пустую строку
+    c = Natural('')
+    print(MUL_Nk_N(a, 3))
