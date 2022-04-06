@@ -13,7 +13,6 @@ class Polynome:
 
     def __str__(self):
         """Возвращает строковое представление многочлена. Малых Андрей."""
-        res = ''
 
         def sign(num):
             """Определяет, какой знак выводить перед членом. Малых Андрей"""
@@ -31,6 +30,9 @@ class Polynome:
             elif i == 1:
                 return 'x'
             return ''
+
+
+        res = ''
 
         for i in range(self.m, -1, -1):
             j = self.m - i  # Номер коэффициента
@@ -66,6 +68,18 @@ def MUL_Pxk_P(a, k):
         a.C.append(Rational("0/1"))
     return a
 
+def DER_P_P(a):
+    """Производная многочлена. Николаев Клим."""
+    if a.m == 0:
+        a.C[0] = 0
+    else:
+        a.m = a.m - 1
+        a.C.pop(len(a.C)-1)
+        t = a.m
+        for i in range(len(a.C)):
+            a.C[i] = a.C[i]*Rational(str(t))
+            t -= 1
+    return a
 
 if __name__ == '__main__':
     a = Polynome("-4/3 7/5 13/2 -5/3 2/4")
@@ -75,3 +89,4 @@ if __name__ == '__main__':
     print(LED_P_Q(a))
     print(DEG_P_N(a))
     print(MUL_Pxk_P(a, k))
+    print(DER_P_P(a))

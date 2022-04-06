@@ -8,9 +8,11 @@ class Rational:
            в виде a/b, выдает рациональное число. Малых Андрей."""
         number = number.strip().split('/')
         number.append('')
-
         self.numer = Integer(number[0])  # Числитель
         self.denom = Natural(number[1])  # Знаменатель
+        if number[1] == '':
+            self.denom = Natural('1')
+
 
     def __str__(self):
         """Возвращает строковое представление числа. Малых Андрей."""
