@@ -116,7 +116,7 @@ def SUB_NN_N(a1, b1):
 
 def MUL_Nk_N(a, k):
     """Умножение натурального числа на 10^k. Ташимбетов Тимур"""
-    c = Natural(str(a))
+    c = a.A.copy()
     D = Natural("")
     for i in range(k):
         c.append(0)
@@ -190,32 +190,35 @@ def MUL_NN_NN(a, b):
                 b_copy = Natural(str(b))
                 temp1 = MUL_ND_N(b_copy, multiplier)
                 temp2 = MUL_Nk_N(temp1, tens)
-                res = ADD_NN_N(temp2,res)
+                res = ADD_NN_N(temp2, res)
                 tens += 1
         a.A.reverse()
         return res
     else:
         return Natural('0')
 
-def DIV_NN_N(a1,b1):
+
+def DIV_NN_N(a1, b1):
     """Частное от деления большего натурального числа на меньшее или равное натуральное с остатком. Угрюмов Михаил"""
     a = Natural(str(a1))
     b = Natural(str(b1))
     temp = Natural(str(b))
     n = Natural(str(1))
-    while COM_NN_D(a,b)==2:
-        b = ADD_NN_N(b,temp)
+    while COM_NN_D(a, b) == 2:
+        b = ADD_NN_N(b, temp)
         n = ADD_1N_N(n)
-        if COM_NN_D(a,b)==0:
+        if COM_NN_D(a, b) == 0:
             return n
-        if COM_NN_D(a,b)==1:
-            return SUB_NN_N(n,1)
+        if COM_NN_D(a, b) == 1:
+            return SUB_NN_N(n, 1)
 
 
 if __name__ == '__main__':
-    a = Natural('32')
-    b = Natural('8')
+    a = Natural('10343423423423423423423423423400')
+    b = Natural('1')
     # Если вам нужно число без цифр длиной ноль, передайте пустую строку
     c = Natural('')
-    print(DIV_NN_N(a, b))
+    print(a, b)
+    print(MUL_NN_NN(a, b))
+    print(a, b)
 

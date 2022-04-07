@@ -36,8 +36,8 @@ def TRANS_Q_Z(a):
 
 def TRANS_Z_Q(с):
     """Преобразование целого в дробное. Щелочкова Екатерина."""
+    a = Rational("1/1")
     a.numer = с
-    a.denom = Natural('1')
     return a
 
 
@@ -47,9 +47,8 @@ if __name__ == '__main__':
     b = Rational("0/53")
     c = Rational("63/1")
     d = Integer("54")
-
-    print(a.denom.A)  # Вывод цифр знаменателя
-    print(a.numer.b)  # Вывод знака числителя
+    print(a, b, c, d)
     print(INT_Q_B(a))
     print(TRANS_Q_Z(c))
     print(TRANS_Z_Q(d))
+    print(a, b, c, d)
