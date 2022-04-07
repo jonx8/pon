@@ -212,6 +212,36 @@ def DIV_NN_N(a1, b1):
         if COM_NN_D(a, b) == 1:
             return SUB_NN_N(n, 1)
 
+        
+def MOD_NN_N(a1, b1):
+    """Остаток от деления большего натурального числа на меньшее или равное натуральное с остатком(делитель отличен от нуля). Виноградов Андрей"""
+    a = Natural(str(a1))
+    b = Natural(str(b1))
+    k = Natural('0')
+    flag = 0
+    Ifer = COM_NN_D(a, b)
+    #Алгоритм использует формулу Делимое = Частное * Делитель + Остаток
+    if Ifer == 2:
+        Div = DIV_NN_N(a, b)
+        Del = MUL_NN_NN(Div, b)
+        if COM_NN_D(a, Del) != 0:
+
+            while flag == 0:
+                Del = ADD_1N_N(Del)
+                k = ADD_1N_N(k)
+                if COM_NN_D(a, Del) == 0:
+                    flag = 1
+    if Ifer == 1:
+        Div = DIV_NN_N(b, a)
+        Del = MUL_NN_NN(Div, a)
+        if COM_NN_D(b, Del) != 0:
+            while flag == 0:
+                Del = ADD_1N_N(Del)
+                k = ADD_1N_N(k)
+                if COM_NN_D(b, Del) == 0:
+                    flag = 1
+    return k
+
 
 if __name__ == '__main__':
     a = Natural('10343423423423423423423423423400')
