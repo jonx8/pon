@@ -29,6 +29,7 @@ def MUL_ND_N(a, x):
     if x != 0:
         a.A.reverse()
         ost = 0
+        i = 0
         for i in range(a.n):
             e = a.A[i]
             a.A[i] = (((e * x) + ost) % 10)
@@ -112,20 +113,22 @@ def SUB_NN_N(a, b):
 
 def MUL_Nk_N(a, k):
     """Умножение натурального числа на 10^k. Ташимбетов Тимур"""
-    c = a.A
+    c = Natural(str(a))  # Отредактировал, чтобы изначально значение не менялось
     D = Natural("")
     for i in range(k):
-        c.append(0)
-    D.A = c
+        c.A.append(0)
+    D.A = c.A
     return D
 
 
-def ADD_NN_N(a, b):
+def ADD_NN_N(a1, b1):
     """Сложение натуральных чисел. Виноградов Андрей"""
-    if COM_NN_D(a, b) != 2:
-        tmp = b
-        b = a
-        a = tmp
+    if COM_NN_D(a1, b1) != 2:
+        a = Natural(str(a1))
+        b = Natural(str(b1))
+    else:
+        b = Natural(str(a1))
+        a = Natural(str(b1))
     a.A.reverse()
     b.A.reverse()
     for i in range(a.n - b.n):
@@ -170,9 +173,32 @@ def ADD_1N_N(a):
     return a
 
 
+def MUL_NN_NN(a, b):
+    """Умножение натуральных чисел. Таланков Влад"""
+    if str(a) != '0' and str(b) != '0':
+        a.A.reverse()
+        res = Natural('0')
+        tens = 0
+        for j in range(a.n):
+            if a.A[j] == 0:
+                tens += 1
+            else:
+                multiplier = a.A[j]
+                b_copy = Natural(str(b))
+                temp1 = MUL_ND_N(b_copy, multiplier)
+                temp2 = MUL_Nk_N(temp1, tens)
+                res = ADD_NN_N(temp2,res)
+                tens += 1
+        a.A.reverse()
+        return res
+    else:
+        return Natural('0')
+
+
 if __name__ == '__main__':
-    a = Natural('156')
-    b = Natural('9844')
+    a = Natural('600853')
+    b = Natural('217')
+    c = Natural('0')
     # Если вам нужно число без цифр длиной ноль, передайте пустую строку
     c = Natural('')
-    print(MUL_Nk_N(a, 3))
+    print(MUL_NN_NN(a, b))
