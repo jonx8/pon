@@ -2,23 +2,48 @@ from rational import Rational
 
 
 class Polynome:
-    def __init__(self, number=""):
-        """Принимает строку с коэффециентами через пробел в виде a/b. Таланков Влад."""
-        number = number.strip()
-        self.C = []
-        number = number.split(' ')
-        self.m = len(number) - 1  # степень многочлена
-        for i in number:
-            self.C.append(Rational(i))  # массив с рац. числами
-    
-    
+    def __init__(self, polynome="0"):
+        """Принимает строку с записью многочлена от переменной x
+           в каноническом виде, возвращает экземпляр класса. Малых Андрей"""
+
+        # Разбиение многочлена на список отдельных членов
+        polynome = polynome.replace('-', '+-').split('+')
+        polynome = [i.replace(' ', '') for i in polynome if i]
+
+        koeffs = []  # Список коэффициентов, записанных в строке polynome
+        degs = []  # Список степеней x, записанных в строке polynome
+
+        for i in polynome:
+            f = i.split('x')
+            if len(f) != 2:
+                f.append(int('0'))
+            elif not f[1]:
+                f[1] = int('1')
+            else:
+                f[1] = int(f[1][1:].strip())
+
+            if not f[0]:
+                f[0] = '1'
+            elif f[0] == '-':
+                f[0] = '-1'
+
+            koeffs.append(f[0])
+            degs.append(f[1])
+
+        self.m = max(degs)  # Степень многочлена
+        self.C = [Rational('0')] * (self.m + 1)  # Список коэффициентов
+        j = 0
+        for i in range(self.m + 1, -1, -1):
+            if i in degs:
+                self.C[self.m - i] = Rational(koeffs[j])
+                j += 1
+
     def frontZerosDel(self):
         """Удаление нулевых коэффициентов перед старшим членом. Малых Андрей"""
         while self.C[0].numer.A == [0] and len(self.C) > 1:
             self.C.pop(0)
         self.m = len(self.C) - 1
-        
-        
+
     def __str__(self):
         """Возвращает строковое представление многочлена. Малых Андрей."""
 
@@ -38,7 +63,6 @@ class Polynome:
             elif i == 1:
                 return 'x'
             return ''
-
 
         res = ''
 
@@ -76,16 +100,17 @@ def MUL_Pxk_P(a, k):
         a.C.append(Rational("0/1"))
     return a
 
+
 def DER_P_P(a):
     """Производная многочлена. Николаев Клим."""
     if a.m == 0:
         a.C[0] = 0
     else:
         a.m = a.m - 1
-        a.C.pop(len(a.C)-1)
+        a.C.pop(len(a.C) - 1)
         t = a.m
         for i in range(len(a.C)):
-            a.C[i] = a.C[i]*Rational(str(t))
+            a.C[i] = a.C[i] * Rational(str(t))
             t -= 1
     return a
 
@@ -119,7 +144,7 @@ def MUL_PQ_P(polynome, num):
 
 
 if __name__ == '__main__':
-    a = Polynome("-4/3 7/5 13/2 -5/3 2/4")
+    a = Polynome("-4/3x^4 + 7/5x^3-13/2x-5/4")
     b = Polynome("3/2 -13/7 -5/2")
     k = int(input())
     print(a)
