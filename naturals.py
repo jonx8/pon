@@ -116,7 +116,7 @@ def SUB_NN_N(a1, b1):
 
 def MUL_Nk_N(a, k):
     """Умножение натурального числа на 10^k. Ташимбетов Тимур"""
-    c = Natural(str(a))
+    c = a.A.copy()
     D = Natural("")
     for i in range(k):
         c.append(0)
@@ -190,7 +190,7 @@ def MUL_NN_NN(a, b):
                 b_copy = Natural(str(b))
                 temp1 = MUL_ND_N(b_copy, multiplier)
                 temp2 = MUL_Nk_N(temp1, tens)
-                res = ADD_NN_N(temp2,res)
+                res = ADD_NN_N(temp2, res)
                 tens += 1
         a.A.reverse()
         return res
@@ -217,5 +217,7 @@ if __name__ == '__main__':
     b = Natural('8')
     # Если вам нужно число без цифр длиной ноль, передайте пустую строку
     c = Natural('')
-    print(DIV_NN_N(a, b))
+    print(MUL_NN_NN(a, b))
+    print(MUL_Nk_N(a,2))
+    print(DIV_NN_N(a,b))
 
