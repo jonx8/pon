@@ -50,6 +50,8 @@ def SUB_NN_N(a1, b1):
     b = Natural(str(b1))
     Ifer = COM_NN_D(a, b)
     D = Natural("")
+    a.A.reverse()
+    b.A.reverse()
     if Ifer == 2:
         c = [0] * a.n
         last = (b.n) - 1
