@@ -41,6 +41,35 @@ def TRANS_Z_Q(с):
     return a
 
 
+def DIV_QQ_Q(a, b):
+    """деление дробей. Снятков Илья"""
+    b.denom = TRANS_N_Z(b.denom)
+    if POZ_Z_D(b.number) == 2:
+        b.number = TRANS_Z_N(b.number)
+    elif POZ_Z_D(b.number) == 1:
+        b.number = MUN_ZM_Z(b.number)
+        b.number = TRANS_Z_N(b.number)
+        a.number = MUN_ZM_Z(a.number)
+    else:
+        print("moron")
+    a.number = MUL_ZZ_Z(a.number, b.denom)
+    a.denom = MUL_NN_N(a.denom, b.number)
+    return a
+
+def MOD_ZZ_Z(a, b):
+    """остаток, a - делимое, b - делитель. Снятков Илья"""
+    if POZ_Z_D(b) == 0:
+        print("moron")
+    else:
+        c = DIV_ZZ_Z(a, b)
+        d = MUL_ZZ_Z(b, c)
+        if (POZ_Z_D(a) == 2 and POZ_Z_D(b) == 2) or (POZ_Z_D(a) == 2 and POZ_Z_D(b) == 1):     
+            r = SUB_ZZ_Z(a, d)
+        elif POZ_Z_D(a) == 1 and POZ_Z_D(b) == 1:   
+            r = MUL_ZM_Z(SUB_ZZ_Z(a, d))
+    return r
+
+
 if __name__ == '__main__':
     # Создание чисел:
     a = Rational("-65/32")
