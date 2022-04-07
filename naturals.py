@@ -174,12 +174,32 @@ def ADD_1N_N(a):
     return a
 
 
+def MUL_NN_NN(a, b):
+    """Умножение натуральных чисел. Таланков Влад"""
+    if str(a) != '0' and str(b) != '0':
+        a.A.reverse()
+        res = Natural('0')
+        tens = 0
+        for j in range(a.n):
+            if a.A[j] == 0:
+                tens += 1
+            else:
+                multiplier = a.A[j]
+                b_copy = Natural(str(b))
+                temp1 = MUL_ND_N(b_copy, multiplier)
+                temp2 = MUL_Nk_N(temp1, tens)
+                res = ADD_NN_N(temp2,res)
+                tens += 1
+        a.A.reverse()
+        return res
+    else:
+        return Natural('0')
+
+
 if __name__ == '__main__':
-    a = Natural('44')
+    a = Natural('120')
     b = Natural('33')
     # Если вам нужно число без цифр длиной ноль, передайте пустую строку
     c = Natural('')
-    print(ADD_NN_N(a, b))
-    print(MUL_Nk_N(a, 3))
-    print(SUB_NN_N(a, b))
+    print(MUL_NN_NN(a, b))
 
