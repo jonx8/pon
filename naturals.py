@@ -217,30 +217,19 @@ def MOD_NN_N(a1, b1):
     """Остаток от деления большего натурального числа на меньшее или равное натуральное с остатком(делитель отличен от нуля). Виноградов Андрей"""
     a = Natural(str(a1))
     b = Natural(str(b1))
-    k = Natural('0')
-    flag = 0
+    D = Natural('0')
     Ifer = COM_NN_D(a, b)
-    #Алгоритм использует формулу Делимое = Частное * Делитель + Остаток
+    #Функция ищет остаток при помощи вычитания делимого на делитель умноженного на частное
     if Ifer == 2:
         Div = DIV_NN_N(a, b)
         Del = MUL_NN_NN(Div, b)
-        if COM_NN_D(a, Del) != 0:
-
-            while flag == 0:
-                Del = ADD_1N_N(Del)
-                k = ADD_1N_N(k)
-                if COM_NN_D(a, Del) == 0:
-                    flag = 1
+        D = SUB_NN_N(Del, a)
     if Ifer == 1:
         Div = DIV_NN_N(b, a)
         Del = MUL_NN_NN(Div, a)
-        if COM_NN_D(b, Del) != 0:
-            while flag == 0:
-                Del = ADD_1N_N(Del)
-                k = ADD_1N_N(k)
-                if COM_NN_D(b, Del) == 0:
-                    flag = 1
-    return k
+        D = SUB_NN_N(Del, b)
+    return D
+
 
 
 if __name__ == '__main__':
