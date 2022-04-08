@@ -70,6 +70,21 @@ def MOD_ZZ_Z(a, b):
     return r
 
 
+def RED_Q_Q(a1):
+    """Сокращение дроби.Ташимбетов Тимур"""
+    Q = Rational(str(a1))
+    r = Rational ("")
+    q1 = Q.numer
+    q2 = Q.denom
+    qN = ABS_Z_N(q1)
+    n = GCF_NN_N(qN,q2)
+    q11 = DIV_ZZ_Z(q1,n)
+    q12 = DIV_ZZ_Z(q2,n)
+    r.numer = q11
+    r.denom = q12
+
+
+
 if __name__ == '__main__':
     # Создание чисел:
     a = Rational("-65/32")

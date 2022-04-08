@@ -212,14 +212,27 @@ def DIV_NN_N(a1, b1):
         if COM_NN_D(a, b) == 1:
             return SUB_NN_N(n, 1)
 
-        
+
+def SUB_NDN_N(a1, b1, D):
+    """Вычитание из натурального другого натурального, умноженного на цифру для случая с неотрицательным результатом. Айрапетов Давид"""
+    a = Natural(str(a1))
+    b = Natural(str(b1))
+    com = COM_NN_D(a, b)
+    if com == 2 or com == 0:
+        b = MUL_ND_N(b, D)
+        d = SUB_NN_N(a, b)
+    elif com == 1:
+        a = MUL_ND_N(a, D)
+        d = SUB_NN_N(a, b)
+
+
 def MOD_NN_N(a1, b1):
     """Остаток от деления большего натурального числа на меньшее или равное натуральное с остатком(делитель отличен от нуля). Виноградов Андрей"""
     a = Natural(str(a1))
     b = Natural(str(b1))
     D = Natural('0')
     Ifer = COM_NN_D(a, b)
-    #Функция ищет остаток при помощи вычитания делимого на делитель умноженного на частное
+    # Функция ищет остаток при помощи вычитания делимого на делитель умноженного на частное
     if Ifer == 2:
         Div = DIV_NN_N(a, b)
         Del = MUL_NN_NN(Div, b)
@@ -231,13 +244,11 @@ def MOD_NN_N(a1, b1):
     return D
 
 
-
 if __name__ == '__main__':
-    a = Natural('10343423423423423423423423423400')
+    a = Natural('1000000')
     b = Natural('1')
     # Если вам нужно число без цифр длиной ноль, передайте пустую строку
     c = Natural('')
     print(a, b)
-    print(MUL_NN_NN(a, b))
+    print(DIV_NN_N(a, b))
     print(a, b)
-

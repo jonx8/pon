@@ -62,6 +62,59 @@ def POZ_Z_D(z):
         return 1
 
 
+def DIV_ZZ_Z(a1, b1):
+    """Частное от деления целого на целое (делитель отличен от нуля).Ташимбетов Тимур"""
+    a = Natural(str(a1))
+    b = Natural(str(b1))
+    if (POZ_Z_D(a) == 2) and (POZ_Z_D(b) == 2):  # если оба числа положительные
+        if a > b:
+            c = DIV_NN_N(a, b)
+        if a < b:
+            c = 0
+        if a == b:
+            c = 1
+    if (POZ_Z_D(a) == 2) and (POZ_Z_D(b) == 1):  # если первое число положительное, а второе отрицательное
+        am = ABS_Z_N(a)
+        bm = ABS_Z_N(b)
+        if am < bm:
+            c = 0
+        if am == bm:
+            c = 1
+        if am > bm:
+            cp = DIV_NN_N(a, b)
+            if MUL_ZZ_Z(cp, bm) == am:
+                c = cp
+            c = MUL_ZZ_Z(c, -1)
+    if (POZ_Z_D(a) == 1) and (POZ_Z_D(b) == 2):  # если первое отрицательное, а второе положительное
+        am = ABS_Z_N(a)
+        bm = ABS_Z_N(b)
+        if am < bm:
+            c = 0
+        if am == bm:
+            c = 1
+        if am > bm:
+            cp = DIV_NN_N(a, b)
+            if MUL_ZZ_Z(cp, bm) == am:
+                c = cp
+            c = ADD_1N_N(c)
+            c = MUL_ZZ_Z(c, -1)
+    if (POZ_Z_D(a) == 1) and (POZ_Z_D(b) == 1):  # если оба числа отрицательные
+        am = ABS_Z_N(a)
+        bm = ABS_Z_N(b)
+        if am < bm:
+            c = 0
+        if am == bm:
+            c = 1
+        if am > bm:
+            cp = DIV_NN_N(a, b)
+            if MUL_ZZ_Z(cp, bm) == am:
+                c = cp
+            c = ADD_1N_N(c)
+    if (POZ_Z_D(a) == 0) and (POZ_Z_D(b) == 1) or (POZ_Z_D(b) == 2):  # если первое число 0
+        c = 0
+    return c
+
+
 if __name__ == '__main__':
     z = Integer("-4")
     nat = Natural("6")
