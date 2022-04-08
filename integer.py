@@ -116,6 +116,29 @@ def DIV_ZZ_Z(a1, b1):
     return c
 
 
+def ADD_ZZ_Z(a, b):
+    
+    """Сложение целых чисел. Дитятьев Иван"""
+
+    if (naturals.COM_NN_D(naturals.Natural(str(ABS_Z_N(a))), naturals.Natural(str(ABS_Z_N(b)))) == 2):
+
+        x = a
+        y = b
+    else:
+        x = b
+        y = a
+        
+    if (x.b == 0 and y.b == 0):
+        return Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)), naturals.Natural(str(y)))))    
+    elif (x.b == 1 and y.b == 1):
+        return MUL_ZM_Z(Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)[1:]), naturals.Natural(str(y)[1:])))))
+    else:
+        if (x.b == 0):
+            return Integer(str(naturals.SUB_NN_N(naturals.Natural(str(x)), naturals.Natural(str(y)[1:]))))
+        else:
+            return MUL_ZM_Z(Integer(str(naturals.SUB_NN_N(naturals.Natural(str(x)[1:]), naturals.Natural(str(y))))))
+
+
 
 if __name__ == '__main__':
     z = Integer("-4")
