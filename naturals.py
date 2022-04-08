@@ -176,7 +176,7 @@ def ADD_1N_N(a):
     return a
 
 
-def MUL_NN_NN(a, b):
+def MUL_NN_N(a, b):
     """Умножение натуральных чисел. Таланков Влад"""
     if str(a) != '0' and str(b) != '0':
         a.A.reverse()
@@ -198,19 +198,25 @@ def MUL_NN_NN(a, b):
         return Natural('0')
 
 
+def DIV_NN_Dk(a1,b1):
+    return 0
+    #В разработке#
 def DIV_NN_N(a1, b1):
     """Частное от деления большего натурального числа на меньшее или равное натуральное с остатком. Угрюмов Михаил"""
     a = Natural(str(a1))
     b = Natural(str(b1))
-    temp = Natural(str(b))
-    n = Natural(str(1))
-    while COM_NN_D(a, b) == 2:
-        b = ADD_NN_N(b, temp)
+    n = Natural(str(0))
+    if COM_NN_D(a, b) == 2:
+        temp = a
+        n = Natural(str(0))
+        while COM_NN_D(temp, b) != 1:
+            temp2 = DIV_NN_Dk(temp, b)
+            n = ADD_NN_N(n, temp)
+            temp3 = MUL_NN_N(temp2, b)
+            temp = SUB_NN_N(temp, temp3)
+    elif COM_NN_D(a, b) == 0:
         n = ADD_1N_N(n)
-        if COM_NN_D(a, b) == 0:
-            return n
-        if COM_NN_D(a, b) == 1:
-            return SUB_NN_N(n, 1)
+    return n
 
 
 def SUB_NDN_N(a1, b1, D):
@@ -235,11 +241,11 @@ def MOD_NN_N(a1, b1):
     # Функция ищет остаток при помощи вычитания делимого на делитель умноженного на частное
     if Ifer == 2:
         Div = DIV_NN_N(a, b)
-        Del = MUL_NN_NN(Div, b)
+        Del = MUL_NN_N(Div, b)
         D = SUB_NN_N(Del, a)
     if Ifer == 1:
         Div = DIV_NN_N(b, a)
-        Del = MUL_NN_NN(Div, a)
+        Del = MUL_NN_N(Div, a)
         D = SUB_NN_N(Del, b)
     return D
 
