@@ -260,6 +260,24 @@ def GCF_NN_N(a1, b1):
             b = MOD_NN_N(a,b)
     return ADD_NN_N(a,b)
 
+def LCM_NN_N(a1,b1):
+    """НОК натуральных чисел. Багмутов Всеволод"""
+    a=Natural(str(a1))
+    b=Natural(str(b1))
+    if COM_NN_D(a,b) == 2:
+        greatest = a
+    else:
+        greatest = b
+    mult = MUL_NN_N(a,b)
+    gcf = GCF_NN_N(a, b)
+    i = Natural('0')
+    while True:
+        if str(MUL_NN_N(i,gcf)) == str(mult):
+            break
+        else:
+            i = ADD_NN_N(i,greatest)
+    return i
+
 if __name__ == '__main__':
     a = Natural('1000000')
     b = Natural('1')
