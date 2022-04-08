@@ -29,7 +29,6 @@ def MUL_ND_N(a, x):
     if x != 0:
         a.A.reverse()
         ost = 0
-        i = 0
         for i in range(a.n):
             e = a.A[i]
             a.A[i] = (((e * x) + ost) % 10)
@@ -45,10 +44,14 @@ def MUL_ND_N(a, x):
         return Natural('0')
 
 
-def SUB_NN_N(a, b):
+def SUB_NN_N(a1, b1):
     """Вычитание из первого большего натурального числа второго меньшего или равного. Виноградов Андрей"""
+    a = Natural(str(a1))
+    b = Natural(str(b1))
     Ifer = COM_NN_D(a, b)
     D = Natural("")
+    a.A.reverse()
+    b.A.reverse()
     if Ifer == 2:
         c = [0] * a.n
         last = (b.n) - 1
@@ -113,22 +116,22 @@ def SUB_NN_N(a, b):
 
 def MUL_Nk_N(a, k):
     """Умножение натурального числа на 10^k. Ташимбетов Тимур"""
-    c = Natural(str(a))  # Отредактировал, чтобы изначально значение не менялось
+    c = a.A.copy()
     D = Natural("")
     for i in range(k):
-        c.A.append(0)
-    D.A = c.A
+        c.append(0)
+    D.A = c
     return D
 
 
 def ADD_NN_N(a1, b1):
     """Сложение натуральных чисел. Виноградов Андрей"""
-    if COM_NN_D(a1, b1) != 2:
-        a = Natural(str(a1))
-        b = Natural(str(b1))
-    else:
-        b = Natural(str(a1))
-        a = Natural(str(b1))
+    a = Natural(str(a1))
+    b = Natural(str(b1))
+    if COM_NN_D(a, b) != 2:
+        tmp = b
+        b = a
+        a = tmp
     a.A.reverse()
     b.A.reverse()
     for i in range(a.n - b.n):
@@ -187,7 +190,7 @@ def MUL_NN_NN(a, b):
                 b_copy = Natural(str(b))
                 temp1 = MUL_ND_N(b_copy, multiplier)
                 temp2 = MUL_Nk_N(temp1, tens)
-                res = ADD_NN_N(temp2,res)
+                res = ADD_NN_N(temp2, res)
                 tens += 1
         a.A.reverse()
         return res
@@ -195,10 +198,57 @@ def MUL_NN_NN(a, b):
         return Natural('0')
 
 
+def DIV_NN_N(a1, b1):
+    """Частное от деления большего натурального числа на меньшее или равное натуральное с остатком. Угрюмов Михаил"""
+    a = Natural(str(a1))
+    b = Natural(str(b1))
+    temp = Natural(str(b))
+    n = Natural(str(1))
+    while COM_NN_D(a, b) == 2:
+        b = ADD_NN_N(b, temp)
+        n = ADD_1N_N(n)
+        if COM_NN_D(a, b) == 0:
+            return n
+        if COM_NN_D(a, b) == 1:
+            return SUB_NN_N(n, 1)
+
+
+def SUB_NDN_N(a1, b1, D):
+    """Вычитание из натурального другого натурального, умноженного на цифру для случая с неотрицательным результатом. Айрапетов Давид"""
+    a = Natural(str(a1))
+    b = Natural(str(b1))
+    com = COM_NN_D(a, b)
+    if com == 2 or com == 0:
+        b = MUL_ND_N(b, D)
+        d = SUB_NN_N(a, b)
+    elif com == 1:
+        a = MUL_ND_N(a, D)
+        d = SUB_NN_N(a, b)
+
+
+def MOD_NN_N(a1, b1):
+    """Остаток от деления большего натурального числа на меньшее или равное натуральное с остатком(делитель отличен от нуля). Виноградов Андрей"""
+    a = Natural(str(a1))
+    b = Natural(str(b1))
+    D = Natural('0')
+    Ifer = COM_NN_D(a, b)
+    # Функция ищет остаток при помощи вычитания делимого на делитель умноженного на частное
+    if Ifer == 2:
+        Div = DIV_NN_N(a, b)
+        Del = MUL_NN_NN(Div, b)
+        D = SUB_NN_N(Del, a)
+    if Ifer == 1:
+        Div = DIV_NN_N(b, a)
+        Del = MUL_NN_NN(Div, a)
+        D = SUB_NN_N(Del, b)
+    return D
+
+
 if __name__ == '__main__':
-    a = Natural('600853')
-    b = Natural('217')
-    c = Natural('0')
+    a = Natural('1000000')
+    b = Natural('1')
     # Если вам нужно число без цифр длиной ноль, передайте пустую строку
     c = Natural('')
-    print(MUL_NN_NN(a, b))
+    print(a, b)
+    print(DIV_NN_N(a, b))
+    print(a, b)
