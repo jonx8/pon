@@ -172,8 +172,32 @@ def SUB_ZZ_Z(a, b):
         if (o): 
             return MUL_ZM_Z(Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)[1:]), naturals.Natural(str(y))))))
         else:
-            return Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)[1:]), naturals.Natural(str(y)))))        
+            return Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)[1:]), naturals.Natural(str(y)))))   
+        
+def MUL_ZZ_Z(a, b):
+  """Произведение целых чисел. Дитятьев Иван"""
+    x = a 
+    y = b
 
+    if ((a.b and b.b) or (not a.b and not b.b)):
+        return Integer(str(naturals.MUL_NN_N(naturals.Natural(str(ABS_Z_N(x))), naturals.Natural(str(ABS_Z_N(y))))))
+    else:
+        return MUL_ZM_Z(Integer(str(naturals.MUL_NN_N(naturals.Natural(str(ABS_Z_N(x))), naturals.Natural(str(ABS_Z_N(y)))))))
+    
+    
+    def MOD_ZZ_Z(a, b):
+    """остаток, a - делимое, b - делитель. Снятков Илья"""
+    if POZ_Z_D(b) == 0:
+        print("moron")
+    else:
+        c = DIV_ZZ_Z(a, b)
+        d = MUL_ZZ_Z(b, c)
+        if (POZ_Z_D(a) == 2 and POZ_Z_D(b) == 2) or (POZ_Z_D(a) == 2 and POZ_Z_D(b) == 1):     
+            r = SUB_ZZ_Z(a, d)
+        elif (POZ_Z_D(a) == 1 and POZ_Z_D(b) == 1) or (POZ_Z_D(a) == 1 and POZ_Z_D(b) == 2):   
+            r = MUL_ZM_Z(SUB_ZZ_Z(a, d))
+    return r
+        
 
 
 if __name__ == '__main__':
