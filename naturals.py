@@ -155,9 +155,9 @@ def ADD_NN_N(a1, b1):
 def NZER_N_B(a):
     """Проверка на ноль: если число не равно нулю, то 'да' иначе 'нет'. Айрапетов Давид"""
     if a.A[0] == 0 and a.n == 1:
-        return True
-    else:
         return False
+    else:
+        return True
 
 
 def ADD_1N_N(a):
