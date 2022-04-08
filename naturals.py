@@ -249,6 +249,16 @@ def MOD_NN_N(a1, b1):
         D = SUB_NN_N(Del, b)
     return D
 
+def GCF_NN_N(a1, b1):
+    """НОД натуральных чисел. Алгоритм Евклида делением. Багмутов Всеволод"""
+    a=Natural(str(a1))
+    b=Natural(str(b1))
+    while NZER_N_B(Natural(str(a)))==True and NZER_N_B(Natural(str(b)))==True:
+        if COM_NN_D(a,b) == 2:
+            a = MOD_NN_N(a,b)
+        else:
+            b = MOD_NN_N(a,b)
+    return ADD_NN_N(a,b)
 
 if __name__ == '__main__':
     a = Natural('1000000')
