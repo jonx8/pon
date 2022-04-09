@@ -9,8 +9,12 @@ from idlelib.tooltip import Hovertip
 class Main(Frame):
     modes = [('Натуральные', 'Natural'), ('Целые', 'Integer'), ('Рациональные', 'Rational'), ('Многочлены', 'Polynome')]
     mode_buttons = []
-    all_buttons = []
+    enter_button = []
     instruction = []
+    argument = 0
+    entry = []
+    var = 0
+    all_buttons = []
     buttons = {
         'Natural': [
             ('COM_NN_D', 'Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе.'),
@@ -71,11 +75,20 @@ class Main(Frame):
             button = Button(text=self.modes[i][0], command=com, font=("Roboto", 14), width=12)
             self.mode_buttons.append(button)
             button.grid(row=0, column=i, padx=(5, 5), pady=(5, 5))
+
         label = Label(text='Поле ввода', font=("Roboto", 14))
-        label.grid(row=1, column=0, columnspan=4, padx=(5, 5), pady=(5, 5))
+        label.grid(row=1, column=0, columnspan=3, padx=(5, 5), pady=(5, 5))
+        self.instruction = label
+
+        self.var = IntVar()
+        enter = Button(text='Ввод', font=("Roboto", 14), width=12, command=lambda: self.var.set(1))
+        enter.grid(row=2, column=3, padx=(5, 5), pady=(5, 5))
+        self.enter_button = enter
+
         message = StringVar()
-        entry = Entry(textvariable=message, font=("Roboto", 14), width=60)
-        entry.grid(row=2, column=0, columnspan=4, padx=(5, 5), pady=(5, 5))
+        entry = Entry(textvariable=message, font=("Roboto", 14), width=45)
+        entry.grid(row=2, column=0, columnspan=3, padx=(5, 5), pady=(5, 5))
+        self.entry = entry
         self.create_buttons(mode)
         self.mainloop()
 
@@ -94,12 +107,40 @@ class Main(Frame):
             com = lambda x=buttons[i][0]: self.calculate(x)
             button = Button(text=buttons[i][0], command=com, font=("Roboto", 14), width=12)
             button.grid(row=3 + i // 4, column=i % 4, padx=(5, 5), pady=(5, 5))
+
             self.all_buttons.append(button)
             Hovertip(button, buttons[i][1], hover_delay=100)
 
+    def is_natural(self, n):
+        if n.isdigit():
+            if int(n) >= 0:
+                return True
+        return False
+
+
+    def get_natural(self):
+        self.instruction.config(text='Введите натуральное число')
+        self.enter_button.wait_variable(self.var)
+        s = self.entry.get()
+        while not self.is_natural(s):
+            self.instruction.config(text='Неправильный формат, попробуйте ещё раз')
+            self.enter_button.wait_variable(self.var)
+            s = self.entry.get()
+        return Natural(s)
+
+
     def calculate(self, name):
         f = eval(name)
+        for button in self.all_buttons:
+            button["state"] = "disable"
+        for button in self.mode_buttons:
+            button["state"] = "disable"
+        arguments = []
+        for i in name.split('_')[1]:
+            if i == 'N':
+                arguments.append(self.get_natural())
 
+        self.instruction.config(text=f(*arguments))
 
 
 if __name__ == '__main__':

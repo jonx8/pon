@@ -1,4 +1,4 @@
-from naturals import Natural
+from naturals import *
 
 
 class Integer:
@@ -62,7 +62,6 @@ def POZ_Z_D(z):
         return 1
 
 
-
 def DIV_ZZ_Z(a1, b1):
     """Частное от деления целого на целое (делитель отличен от нуля).Ташимбетов Тимур"""
     a = Natural(str(a1))
@@ -117,19 +116,18 @@ def DIV_ZZ_Z(a1, b1):
 
 
 def ADD_ZZ_Z(a, b):
-    
     """Сложение целых чисел. Дитятьев Иван"""
 
-    if (naturals.COM_NN_D(naturals.Natural(str(ABS_Z_N(a))), naturals.Natural(str(ABS_Z_N(b)))) == 2):
+    if COM_NN_D(Natural(str(ABS_Z_N(a))), Natural(str(ABS_Z_N(b)))) == 2:
 
         x = a
         y = b
     else:
         x = b
         y = a
-        
+
     if (x.b == 0 and y.b == 0):
-        return Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)), naturals.Natural(str(y)))))    
+        return Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)), naturals.Natural(str(y)))))
     elif (x.b == 1 and y.b == 1):
         return MUL_ZM_Z(Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)[1:]), naturals.Natural(str(y)[1:])))))
     else:
@@ -137,8 +135,8 @@ def ADD_ZZ_Z(a, b):
             return Integer(str(naturals.SUB_NN_N(naturals.Natural(str(x)), naturals.Natural(str(y)[1:]))))
         else:
             return MUL_ZM_Z(Integer(str(naturals.SUB_NN_N(naturals.Natural(str(x)[1:]), naturals.Natural(str(y))))))
-        
-        
+
+
 def SUB_ZZ_Z(a, b):
     """Разность целых чисел(a - b). Дитятьев Иван"""
     if (naturals.COM_NN_D(naturals.Natural(str(ABS_Z_N(a))), naturals.Natural(str(ABS_Z_N(b)))) == 2):
@@ -149,7 +147,7 @@ def SUB_ZZ_Z(a, b):
         x = b
         y = a
         o = 0
-        
+
     if (x.b == 1 and y.b == 1):
         if (o):
             return MUL_ZM_Z(Integer(str(naturals.SUB_NN_N(naturals.Natural(str(x)[1:]), naturals.Natural(str(y)[1:])))))
@@ -169,35 +167,34 @@ def SUB_ZZ_Z(a, b):
         else:
             return MUL_ZM_Z(Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)), naturals.Natural(str(y)[1:])))))
     else:
-        if (o): 
+        if (o):
             return MUL_ZM_Z(Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)[1:]), naturals.Natural(str(y))))))
         else:
-            return Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)[1:]), naturals.Natural(str(y)))))   
-        
+            return Integer(str(naturals.ADD_NN_N(naturals.Natural(str(x)[1:]), naturals.Natural(str(y)))))
+
+
 def MUL_ZZ_Z(a, b):
-  """Произведение целых чисел. Дитятьев Иван"""
-    x = a 
+    """Произведение целых чисел. Дитятьев Иван"""
+    x = a
     y = b
 
     if ((a.b and b.b) or (not a.b and not b.b)):
         return Integer(str(naturals.MUL_NN_N(naturals.Natural(str(ABS_Z_N(x))), naturals.Natural(str(ABS_Z_N(y))))))
     else:
         return MUL_ZM_Z(Integer(str(naturals.MUL_NN_N(naturals.Natural(str(ABS_Z_N(x))), naturals.Natural(str(ABS_Z_N(y)))))))
-    
-    
-    def MOD_ZZ_Z(a, b):
+
+def MOD_ZZ_Z(a, b):
     """остаток, a - делимое, b - делитель. Снятков Илья"""
     if POZ_Z_D(b) == 0:
         print("moron")
     else:
         c = DIV_ZZ_Z(a, b)
         d = MUL_ZZ_Z(b, c)
-        if (POZ_Z_D(a) == 2 and POZ_Z_D(b) == 2) or (POZ_Z_D(a) == 2 and POZ_Z_D(b) == 1):     
+        if (POZ_Z_D(a) == 2 and POZ_Z_D(b) == 2) or (POZ_Z_D(a) == 2 and POZ_Z_D(b) == 1):
             r = SUB_ZZ_Z(a, d)
-        elif (POZ_Z_D(a) == 1 and POZ_Z_D(b) == 1) or (POZ_Z_D(a) == 1 and POZ_Z_D(b) == 2):   
+        elif (POZ_Z_D(a) == 1 and POZ_Z_D(b) == 1) or (POZ_Z_D(a) == 1 and POZ_Z_D(b) == 2):
             r = MUL_ZM_Z(SUB_ZZ_Z(a, d))
     return r
-        
 
 
 if __name__ == '__main__':
